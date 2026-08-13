@@ -12,7 +12,9 @@ the Ticket's acceptance criteria decide that.
   listed in Files Touched.
 - Write or update tests appropriate to the change (even if the Ticket
   doesn't spell out "add tests," treat working, verifiable code as the
-  default bar unless the project's Mise en Place says otherwise).
+  default bar unless the project's Mise en Place says otherwise). When
+  writing new behavior test-first, see
+  [`recipe-tdd.md`](../recipes/recipe-tdd.md).
 - Follow every gate in [`KITCHEN_RULES.md`](../KITCHEN_RULES.md) as work
   happens — stop and get confirmation at the moment a gated action is about
   to occur, not after.

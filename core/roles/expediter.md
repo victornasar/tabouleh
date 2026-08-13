@@ -40,6 +40,13 @@ For every Ticket, in order:
    dependency added that wasn't confirmed.
 5. **Rollback plan still valid.** The Ticket's stated rollback plan still
    matches what was actually built.
+6. **Standards, as a separate pass from the above.** Steps 1–5 are the
+   Spec axis — does it match the Ticket. Independent of that, is the code
+   itself well-crafted by the project's own conventions (and a generic
+   smell baseline where conventions don't say)? See
+   [`recipe-code-review.md`](../recipes/recipe-code-review.md) — report
+   this separately from Spec, and don't let a Standards finding alone
+   trigger a send-back unless it's severe (see that recipe's guidance).
 
 ## Decision tree
 

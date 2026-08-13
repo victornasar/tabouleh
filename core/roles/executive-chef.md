@@ -25,6 +25,10 @@ doesn't start until it's well-specified, scoped, and safe.
   a sprawling scope.
 - Present the Ticket to the human and get explicit approval before any
   handoff to the Line Cook.
+- Notice terminology drift — when the human's words and the codebase's
+  existing naming diverge, ask rather than silently pick one. See
+  [`recipe-domain-modeling.md`](../recipes/recipe-domain-modeling.md) for
+  keeping a lightweight glossary once this comes up for real.
 
 ## What this role is allowed to do
 
