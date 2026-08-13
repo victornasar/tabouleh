@@ -1,0 +1,59 @@
+# Adapter: Claude Code
+
+How Tabouleh's core concepts map into Claude Code's actual mechanisms.
+
+## Mapping
+
+| Tabouleh concept | Claude Code mechanism |
+|---|---|
+| `core/KITCHEN_RULES.md` + `core/THE_PASS.md` | Pulled into the project's `CLAUDE.md`, read at the start of every session |
+| Executive Chef, Line Cook, Expediter | Three files under `.claude/agents/`, one per role |
+| Ticket | A markdown file (e.g. `tickets/<slug>.md`), created from `core/templates/ticket.template.md` |
+| Mise en Place | A markdown file (e.g. `MISE_EN_PLACE.md` at project root), created from `core/templates/mise-en-place.template.md` |
+| Walk-in | The project's `CLAUDE.md` plus whatever memory files the project already keeps — Tabouleh doesn't introduce a separate mechanism, it just makes sure Mise en Place and prior Tickets are part of what gets loaded |
+| Recipes | Referenced directly from `.claude/agents/` role files or `CLAUDE.md` by relative path into the attached `tabouleh/` repo — not copied |
+
+## CLAUDE.md
+
+Generated from [`CLAUDE.md.template`](CLAUDE.md.template): it references
+(or inlines, if the project prefers a self-contained file) Tabouleh's
+`KITCHEN_RULES.md` and `THE_PASS.md`, then appends the project's own Mise
+en Place. This is the file Claude Code reads automatically, so it's the
+anchor point for the whole system in this tool.
+
+## `.claude/agents/`
+
+Each brigade role becomes an agent definition:
+
+- `.claude/agents/executive-chef.md` — sourced from
+  `tabouleh/core/roles/executive-chef.md`, with Claude Code's agent
+  frontmatter (name, description, and **no write tools** — this role plans,
+  it doesn't implement) added on top.
+- `.claude/agents/line-cook.md` — sourced from
+  `tabouleh/core/roles/line-cook.md`, with full read/write/execute tools
+  scoped to the working directory.
+- `.claude/agents/expediter.md` — sourced from
+  `tabouleh/core/roles/expediter.md`, with **read-only tools** in the
+  frontmatter (no `Edit`, `Write`, or any tool that mutates files). This is
+  where the Expediter's read-only requirement gets enforced mechanically,
+  not just by convention — Claude Code's permission system is the actual
+  gate.
+
+## Confirmation gates
+
+Kitchen Rules' CONFIRM actions map onto Claude Code's permission-prompt
+behavior: commands and tools that would otherwise require a manual
+approval in Claude Code (destructive bash commands, git push, etc.) are
+exactly the category Kitchen Rules asks the agent to pause on regardless.
+The adapter doesn't need to invent new machinery for this — it aligns
+Kitchen Rules' language with the tool's existing prompts so an approval in
+Claude Code corresponds to an approval Kitchen Rules would also have
+required.
+
+## Setup
+
+See [`setup/attach.md`](../../setup/attach.md) for the full walkthrough.
+The short version: symlink or submodule `tabouleh/` into the project, run
+`CLAUDE.md.template` through the project's Mise en Place to produce a real
+`CLAUDE.md`, and create the three files under `.claude/agents/` referencing
+the role files above.
