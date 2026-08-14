@@ -57,6 +57,8 @@ tabouleh/
     KITCHEN_RULES.md        Safety rules: confirm / block / escalate, by action
     THE_PASS.md              The workflow: ticket -> fire -> plate -> expedite -> serve
     PARALLEL_LINE.md          Opt-in: running multiple Tickets at once
+    LINE_MEETING.md           How a real weakness becomes a fix to core/
+    CHANGELOG.md              Log of every Line Meeting finding and its fix
     roles/                   One file per brigade role
     recipes/                 Reusable procedures for common tasks
     templates/                Blank Ticket and Mise en Place formats
@@ -87,4 +89,8 @@ Tabouleh is a template/toolkit repo. It has no "production" deployment of its
 own, but its `core/` files are load-bearing for every project that attaches
 it — so changes here follow the same discipline described in
 [`core/KITCHEN_RULES.md`](core/KITCHEN_RULES.md), including confirmation
-before deleting or rewriting anything in `core/` or `adapters/`.
+before deleting or rewriting anything in `core/` or `adapters/`. When a real
+weakness in the harness itself turns up while working on an attached
+project, [`core/LINE_MEETING.md`](core/LINE_MEETING.md) is the actual
+procedure for proposing and logging the fix — not an ad hoc conversation
+each time.
