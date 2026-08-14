@@ -109,6 +109,18 @@ that apply throughout every Ticket:
 | A Ticket that is ambiguous, internally contradictory, or missing acceptance criteria | **ESCALATE** before firing | Don't guess at intent on anything with the response classes above. |
 | The Expediter finding a Kitchen Rules violation in finished work | **ESCALATE** immediately, not a normal send-back | See [`expediter.md`](roles/expediter.md) and [`THE_PASS.md`](THE_PASS.md) loopback policy — rule violations don't go through the normal retry loop. |
 
+## 9. Parallel execution
+
+These apply only when running multiple Tickets at once under
+[`PARALLEL_LINE.md`](PARALLEL_LINE.md) — irrelevant for the normal
+one-Ticket-at-a-time Pass.
+
+| Action | Response | Notes |
+|---|---|---|
+| Firing two Tickets whose Files Touched lists overlap, even by one file, at the same time | **BLOCK** | Not a judgment call — the core invariant `PARALLEL_LINE.md` depends on. Re-scope one of the Tickets or run them sequentially instead. |
+| A merge conflict at a parallel Ticket's merge-back step | **ESCALATE**, don't force-resolve | A conflict here means the disjoint-files invariant was actually violated somewhere — that's a process signal, not a git problem to click through. |
+| Multiple parallel Tickets each hitting a CONFIRM-gated action around the same time | Each gets its own explicit human response | Running in parallel doesn't bundle or reduce confirmation obligations — a yes to one Ticket's gated action is not a yes to another's, even if they land in the same moment. |
+
 ## How to read "no confirmation needed"
 
 Anything not listed above, and anything explicitly marked "no confirmation

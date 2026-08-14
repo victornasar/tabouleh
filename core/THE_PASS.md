@@ -11,6 +11,12 @@ what happens at each one.
  (Chef)      (Line Cook)  (Line Cook)   (Expediter)     (done)
 ```
 
+This describes one Ticket at a time — the default, and almost always the
+right choice. When there's an actual backlog of independent, already-
+approved Tickets, see [`PARALLEL_LINE.md`](PARALLEL_LINE.md) for running
+several of these pipelines at once; it adds claiming, isolation, and a
+merge-back step around the same five stages below, unchanged.
+
 ## Stage 1 — Ticket
 
 **Owner:** Executive Chef.

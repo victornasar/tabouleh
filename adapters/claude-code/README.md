@@ -53,6 +53,27 @@ for a large or ambiguous request (spawn `executive-chef` to produce a
 Ticket for review before any implementation session even starts), though
 it's less critical there since the human approves the Ticket regardless.
 
+## Parallel Line
+
+For firing multiple approved, Files-Touched-disjoint Tickets at once (see
+[`PARALLEL_LINE.md`](../../core/PARALLEL_LINE.md)) — this is Claude Code's
+real mechanism for it, not an approximation:
+
+1. Verify the disjoint-files rule yourself before claiming anything —
+   don't rely on each Line Cook to notice a conflict after the fact.
+2. Create one `git worktree` per Ticket being fired, per
+   `PARALLEL_LINE.md`'s naming convention.
+3. Spawn one `line-cook` subagent per Ticket via the Agent tool, each
+   given its own worktree path and told to work exclusively within it —
+   in a tool that supports backgrounding subagent calls, run them
+   backgrounded so they actually proceed concurrently rather than one
+   blocking the next.
+4. As each finishes Plate, spawn its `expediter` subagent the same way
+   Expedite normally works (see above), pointed at that Ticket's branch
+   diff specifically.
+5. On a pass, merge that Ticket's branch back per `PARALLEL_LINE.md`'s
+   merge-back step, then remove its worktree.
+
 ## Confirmation gates
 
 Kitchen Rules' CONFIRM actions map onto Claude Code's permission-prompt

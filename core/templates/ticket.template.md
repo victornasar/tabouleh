@@ -11,6 +11,7 @@ not applicable.
 **Owner (Line Cook):**
 **Retry count:** 0
 **Related project Mise en Place:** <link, if applicable>
+**Worktree:** <branch name, only if fired under core/PARALLEL_LINE.md — leave blank otherwise>
 
 ## Problem
 

@@ -56,6 +56,7 @@ tabouleh/
   core/
     KITCHEN_RULES.md        Safety rules: confirm / block / escalate, by action
     THE_PASS.md              The workflow: ticket -> fire -> plate -> expedite -> serve
+    PARALLEL_LINE.md          Opt-in: running multiple Tickets at once
     roles/                   One file per brigade role
     recipes/                 Reusable procedures for common tasks
     templates/                Blank Ticket and Mise en Place formats

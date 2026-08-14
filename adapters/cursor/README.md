@@ -53,6 +53,30 @@ in preference order:
    "independent" both as conventions, not guarantees, and don't reach for
    it just to save the cost of opening a second chat.
 
+## Parallel Line
+
+Cursor has no subagent primitive to spawn into — the same gap as Role
+separation above, and it applies here too. There's no way to get the real
+version described in
+[`PARALLEL_LINE.md`](../../core/PARALLEL_LINE.md) (one tool call spawning
+N concurrent, isolated agents). The honest approximation:
+
+1. Still create one `git worktree` per Ticket, per `PARALLEL_LINE.md`'s
+   naming convention — this part works the same regardless of tool, since
+   it's just git.
+2. Open one separate Cursor window per worktree (Cursor can open a
+   worktree directory as its own window), and fire one Ticket per window
+   manually.
+3. You are the coordination layer Claude Code's Agent tool would
+   otherwise be — nothing here tracks claims or prevents you from
+   accidentally opening the same Ticket twice. Watch the `Worktree` field
+   in each Ticket yourself.
+4. Expedite each one per the separate-chat approach above, then merge back
+   per `PARALLEL_LINE.md` manually.
+
+This is meaningfully more manual than the Claude Code version — worth
+knowing going in, not something to discover halfway through.
+
 ## Setup
 
 See [`setup/attach.md`](../../setup/attach.md) for the full walkthrough.
