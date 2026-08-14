@@ -122,6 +122,16 @@ approximation, documented as such).
 - Each send-back's feedback is cumulative context for the next attempt —
   the Line Cook sees what previous rounds got flagged for, so the same
   issue doesn't get reintroduced.
+- **Re-verification on attempt 2+ scopes to what changed, not everything
+  again.** Attempt 1's Expedite already established the full picture. If
+  attempt 2 only touched what the send-back named, re-confirm the fix,
+  re-run whatever a full check would need to re-run to trust the result
+  (a build, the specific test), and reconcile the Ticket's own bookkeeping
+  (Files Touched, acceptance criteria) against the now-current diff — but
+  don't re-derive the whole investigation from zero each round. Full-cost
+  re-verification on every attempt turns a cheap fix into an expensive
+  loop for no added rigor. See [`expediter.md`](roles/expediter.md)'s
+  "Keep the report proportional."
 
 ## Stage 5 — Serve
 
@@ -134,6 +144,14 @@ can merge/deploy without re-checking the Expediter's work from scratch.
 **What "served" does not mean:** it does not mean deployed to production.
 Deployment is its own CONFIRM-gated action (Kitchen Rules §6) that happens
 after Serve, at the human's direction.
+
+**Serve is also a natural session boundary.** Once a Ticket (or a batch of
+related Tickets) is Served, the conversation that produced it has done its
+job — carrying its full history into unrelated work that follows costs
+context and money for no benefit the next piece of work actually needs.
+Starting a fresh session for the next distinct chunk of work, rather than
+extending an already-long one indefinitely, is the default, not something
+to only consider once a session is struggling under its own size.
 
 ## Summary table
 

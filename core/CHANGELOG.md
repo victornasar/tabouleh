@@ -11,6 +11,37 @@ Newest first.
 
 ---
 
+## 2026-08-13 — Independent review cost ~287k tokens on one Ticket
+
+**Triggering project:** vitals, Ticket 19 (data export). Three independent
+Expedite subagent calls — testing the Expediter independence fix live —
+reported 69,763 + 126,046 + 91,609 tokens respectively, ~287k total,
+almost the entire session's token usage for that stretch of work.
+
+**What happened:** each Expedite pass, including the third — which was
+re-verifying a one-line documentation fix after two substantive rounds
+had already done the real investigation — ran a full from-scratch
+investigation and reported it as a complete narrated log (every command,
+every file read, full reasoning). The rigor was real and caught real
+issues in rounds 1 and 2; round 3's cost was disproportionate to what it
+actually needed to check.
+
+**Why the gap existed:** nothing in `expediter.md` or `THE_PASS.md`
+distinguished "how thorough the check needs to be" from "how long the
+report of the check needs to be," or said later retry rounds could scope
+down once the first round had already mapped the territory. Independence
+was specified; proportionality wasn't.
+
+**Fix:** `roles/expediter.md` gained a "Keep the report proportional"
+section — verdict + itemized findings by default, full evidence only
+when actually needed, and later attempts re-verify what changed rather
+than re-deriving everything. `THE_PASS.md`'s loopback policy gained the
+same scoping guidance, plus a new note that Serve is a natural session
+boundary — carrying a finished Ticket's full history into unrelated
+future work costs context for no benefit.
+
+**Files changed:** `core/roles/expediter.md`, `core/THE_PASS.md`.
+
 ## 2026-08-13 — Freshly-created `.claude/agents/` files aren't spawnable mid-session
 
 **Triggering project:** vitals, Ticket 19 — the first live test of the

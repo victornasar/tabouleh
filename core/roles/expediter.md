@@ -97,3 +97,27 @@ An escalation to the human states:
   immediate attention — e.g. a committed secret).
 - A recommendation, if there is an obvious one, without deciding on the
   human's behalf.
+
+## Keep the report proportional
+
+Independence is worth real cost — don't cut corners on the checks
+themselves. But the *report* of what you did isn't the same thing as the
+checking, and it doesn't need to reproduce every command and its full
+output to be trustworthy:
+
+- **Report a verdict and itemized findings, not a narrated investigation
+  log.** "Checked X by running Y, confirmed Z" is enough — the reader
+  needs to trust the check happened and know the result, not watch it
+  happen. If the requesting context needs deep evidence to act on a
+  finding (e.g. the human wants to see the actual failing output), say so
+  and provide it *then* — don't front-load it into every report on the
+  chance it's needed.
+- **Later attempts on the same Ticket don't need to re-derive everything
+  from zero.** If attempt 1 already established the full picture, attempt
+  2's report only needs to cover what changed and re-confirm nothing else
+  regressed — not repeat the full first-principles investigation. Re-check
+  enough to trust the result, not so much that verification costs more
+  than the fix did.
+- This isn't a license to skip checks — it's specifically about report
+  *length*, not check *rigor*. Found in this project on 2026-08-13: see
+  [`CHANGELOG.md`](../CHANGELOG.md) for the incident this came from.
