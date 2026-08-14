@@ -53,9 +53,16 @@ does, announce which phase is active and self-enforce its boundaries:
 - In **Plate**, run the self-review checklist in
   `<TABOULEH_PATH>/core/recipes/recipe-self-review.md` before declaring
   work ready for Expedite.
-- In **Expedite**, treat this as read-only: check the diff against the
-  Ticket's acceptance criteria and report findings, do not edit files
-  during this phase even though nothing prevents it mechanically.
+- **For Expedite, open a new chat** rather than continuing this one — paste
+  in only the Ticket file and the diff against its baseline commit, not
+  the Fire/Plate conversation. A review from a context that never saw the
+  implementation reasoning is a materially stronger check than the same
+  conversation switching roles, since that context has no memory of its
+  own reasoning to defend. Treat continuing in the same chat as a fallback
+  for trivial Tickets only, not the default — and if it's used, it's
+  still read-only in effect: report findings against the Ticket, don't
+  edit files during this phase even though nothing prevents it
+  mechanically.
 
 Tickets are created under `<TICKETS_PATH>` (e.g. `./tickets/`) using
 `<TABOULEH_PATH>/core/templates/ticket.template.md`.

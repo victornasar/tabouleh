@@ -44,6 +44,13 @@ sourced from `<TABOULEH_PATH>/core/roles/`:
 - **expediter** — reviewer, read-only tools, checks work against the
   Ticket before it's called done.
 
+**At Expedite, spawn the `expediter` subagent via the Agent tool — do not
+review the work in the same conversation that just implemented it.** Give
+it only the Ticket's file path and the diff against its baseline commit;
+it should not inherit the Fire/Plate conversation or reasoning. This is
+the actual mechanism behind "independent check" in `THE_PASS.md` — a
+same-context role switch is not a substitute for it.
+
 Tickets are created under `<TICKETS_PATH>` (e.g. `./tickets/`) using
 `<TABOULEH_PATH>/core/templates/ticket.template.md`.
 

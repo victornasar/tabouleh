@@ -28,26 +28,30 @@ apply) and the older single `.cursorrules` file. Use
 
 ## Role separation
 
-Cursor doesn't have a first-class equivalent of Claude Code's
-per-agent tool permissions (e.g. a mechanically-enforced read-only mode for
-the Expediter). Two ways to approximate the brigade structure:
+Cursor doesn't have a first-class equivalent of Claude Code's per-agent
+tool permissions or a subagent primitive to spawn — there's no mechanism
+here that gets as close to real independence as the Claude Code adapter's
+Agent-tool invocation does. Two ways to approximate the brigade structure,
+in preference order:
 
-1. **Sequential, single-session:** work through Ticket → Fire → Plate →
-   Expedite as explicit phases in one conversation, with the rules file
-   instructing Cursor to explicitly announce which phase it's in and to
-   self-enforce the boundaries of that phase (e.g. "I am now in Expedite —
-   I will not edit files, only report findings against the Ticket").
-   This relies on instruction-following rather than a tool-level
-   permission gate, so it's weaker than the Claude Code adapter — treat
-   the Expediter phase's "read-only" as a strong convention, not a
-   guarantee, and have a human spot-check it periodically.
-2. **Separate chats:** open a fresh Cursor chat for the Expedite phase
-   specifically, with a prompt that only gives it the Ticket and the diff
-   to review, not edit access framing. This gets closer to real separation
-   at the cost of manually carrying context between chats.
-
-Prefer (1) for small/solo projects, (2) when the review step matters more
-(larger teams, higher-risk changes).
+1. **Separate chats (default).** Open a fresh Cursor chat for the Expedite
+   phase, and give it *only* the Ticket file and the diff to review —
+   don't carry the Fire/Plate conversation into it, and don't frame it
+   with edit access. This is the closest approximation available in
+   Cursor to a context that never saw the implementation reasoning, which
+   is the actual thing that makes a review independent — not just "asked
+   to check its own work" phrased as a separate step. Default to this even
+   for solo, low-stakes projects; the fresh-context benefit doesn't
+   disappear just because no one else is reviewing alongside you.
+2. **Sequential, single-session** (fallback for trivial Tickets only):
+   work through Ticket → Fire → Plate → Expedite as explicit phases in one
+   conversation, with the rules file instructing Cursor to announce which
+   phase it's in and self-enforce that phase's boundaries (e.g. "I am now
+   in Expedite — I will not edit files, only report findings against the
+   Ticket"). This relies entirely on instruction-following, not a
+   tool-level gate or a fresh context — treat its "read-only" and
+   "independent" both as conventions, not guarantees, and don't reach for
+   it just to save the cost of opening a second chat.
 
 ## Setup
 

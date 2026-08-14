@@ -39,6 +39,20 @@ Each brigade role becomes an agent definition:
   not just by convention — Claude Code's permission system is the actual
   gate.
 
+**These are meant to be invoked as real subagents, not just documented as
+a mapping.** At Expedite (see `THE_PASS.md`), the session that just ran
+Fire/Plate must actually call the Agent tool with the `expediter`
+subagent — e.g. "use the Agent tool to launch the `expediter` subagent,
+passing it the path to the Ticket and the diff against its baseline
+commit, and nothing else about how the implementation was reached." Do
+**not** treat "I'll now act as Expediter" in the same conversation as
+equivalent — that's the same-context weakness this mapping exists to
+avoid, and Claude Code's Agent tool is specifically what makes the real
+version possible here. The Executive Chef step can be run the same way
+for a large or ambiguous request (spawn `executive-chef` to produce a
+Ticket for review before any implementation session even starts), though
+it's less critical there since the human approves the Ticket regardless.
+
 ## Confirmation gates
 
 Kitchen Rules' CONFIRM actions map onto Claude Code's permission-prompt

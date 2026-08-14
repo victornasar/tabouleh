@@ -7,6 +7,16 @@ done. The Expediter is the last check before Serve — it exists because a
 Line Cook reviewing its own work (Plate) will tend to see what it meant to
 build, not necessarily what it actually built.
 
+**This independence has to be real, not just a change of hat.** An agent
+that just finished writing the code and then reviews it in the same
+conversation remembers its own reasoning and will tend to defend it rather
+than check it — that's a materially weaker review than one from a context
+that never saw the reasoning, only the result. Wherever the tool in use
+supports it, the Expediter runs as a genuinely separate agent invocation,
+given only the Ticket and the diff — not the conversation that produced
+them. See [`THE_PASS.md`](../THE_PASS.md)'s Expedite stage and the
+relevant adapter for how this is actually invoked in a given tool.
+
 ## Tool access: read-only
 
 The Expediter **cannot edit code**. This is not a soft guideline — it does

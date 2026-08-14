@@ -75,6 +75,19 @@ one item at a time. This is an independent check, not a rubber stamp of the
 Line Cook's self-review. See [`expediter.md`](roles/expediter.md) for the
 full checklist.
 
+**The Expediter is invoked as a genuinely separate context, not a role
+switch.** When the tool in use supports spawning an independent agent
+(e.g. Claude Code's Agent/Task tool with a dedicated `expediter`
+definition), Expedite means actually spawning it — handing it only the
+Ticket and the diff, not the Fire/Plate conversation that produced them.
+A reviewer who remembers writing the code will defend its own reasoning
+instead of checking it; a reviewer with no memory of writing it can't.
+When the tool has no such mechanism, the adapter for that tool states its
+best available approximation explicitly rather than silently treating a
+same-context role-switch as equivalent — see each adapter's own notes on
+this (Claude Code's is closest to the real thing; Cursor's is a weaker
+approximation, documented as such).
+
 **Possible outcomes:**
 
 1. **Pass** — every acceptance criterion is met, no Kitchen Rules
