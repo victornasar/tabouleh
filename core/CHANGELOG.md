@@ -11,6 +11,36 @@ Newest first.
 
 ---
 
+## 2026-08-13 — Freshly-created `.claude/agents/` files aren't spawnable mid-session
+
+**Triggering project:** vitals, Ticket 19 — the first live test of the
+Expediter independence fix.
+
+**What happened:** vitals never actually had its Claude Code adapter
+files generated (`CLAUDE.md`, `.claude/agents/`) — only symlinked and
+given a Mise en Place. Generated them mid-session specifically to spawn a
+real `expediter` subagent for Ticket 19's Expedite stage. The Agent tool
+call failed: `Agent type 'expediter' not found. Available agents: ...` —
+the newly-written file wasn't recognized as a `subagent_type` option in
+the already-running session.
+
+**Why the gap existed:** the Claude Code adapter documented spawning
+`.claude/agents/*.md` role files as subagents without ever having been
+exercised against a project whose adapter files were generated *during*
+the same session that then tried to use them — every prior use assumed
+the adapter was already in place from a previous session.
+
+**Fix:** didn't change the underlying mechanism (nothing to fix there —
+this is a real Claude Code session-lifecycle behavior, not a bug in the
+adapter's design). Documented the limitation and its workaround directly
+in `adapters/claude-code/README.md`: fall back to `general-purpose` with
+the role file's content given directly in the spawn prompt for the
+current session (still achieves genuine context isolation), and
+regenerate + start a fresh session for the real named-type version going
+forward.
+
+**Files changed:** `adapters/claude-code/README.md`.
+
 ## 2026-08-13 — Expediter reviewing its own work in the same context
 
 **Triggering project:** vitals, discovered mid-conversation while

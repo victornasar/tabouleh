@@ -53,6 +53,18 @@ for a large or ambiguous request (spawn `executive-chef` to produce a
 Ticket for review before any implementation session even starts), though
 it's less critical there since the human approves the Ticket regardless.
 
+**Known gap, found in practice:** `.claude/agents/*.md` files created or
+edited mid-session are not picked up as new `subagent_type` options in
+that same running session — the Agent tool's available types are fixed at
+session start. If a project's adapter files are generated (or changed)
+during the current session, the Agent tool call to spawn e.g. `expediter`
+will fail with "Agent type not found" until a fresh session starts. The
+practical workaround for the current session: fall back to the generic
+`general-purpose` subagent type with the role file's content given
+directly in the spawn prompt (still gets genuine context isolation, the
+part that actually matters — just not a named custom type). Regenerating
+the adapter and then starting a new session is the real fix.
+
 ## Parallel Line
 
 For firing multiple approved, Files-Touched-disjoint Tickets at once (see
