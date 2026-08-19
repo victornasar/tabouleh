@@ -11,6 +11,41 @@ Newest first.
 
 ---
 
+## 2026-08-14 — No step between architecture and code for new shapes
+
+**Triggering project:** vitals, Ticket 19, send-back #1 — the
+`GymEntryDTO` that silently dropped `GymEntry`'s legacy `arms`/`thighs`
+fields.
+
+**What happened:** the Ticket's Approach described the export feature at
+an architecture level ("build DTOs mirroring the models, encode as
+JSON") but never went one level deeper into the actual field-by-field
+shape of `GymEntryDTO` against the real `GymEntry` source. The DTO got
+built from a skim of "the current fields," missing two real ones. An
+independent Expediter pass caught it — but the cost of that catch (a
+full send-back cycle) was avoidable: a few minutes spent on the actual
+shape before Fire would have caught it for free.
+
+**Why the gap existed:** Tabouleh's Ticket format has Problem,
+Approach, Files Touched, Acceptance Criteria — nothing that names the
+specific layer between "what are we building" and "what does the code
+say," which is exactly where this kind of miss lives. Read (and
+independently evaluated against this same incident) Dex Horthy's [Why
+Software Factories Fail](https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/wsff.md),
+which names this same gap as "program design" and argues it's commonly
+skipped industry-wide, not specific to Tabouleh.
+
+**Fix:** new `core/recipes/recipe-program-design.md` — field/type
+mapping against real source, call-stack sketch for control-flow changes,
+per-file "what changes here" notes, scoped only to Tickets that
+introduce a new type, data-transformation boundary, or call-flow change
+(not every Ticket — most don't need it). Cross-linked from
+`roles/executive-chef.md` and `templates/ticket.template.md`'s Approach
+section.
+
+**Files changed:** `core/recipes/recipe-program-design.md` (new),
+`core/roles/executive-chef.md`, `core/templates/ticket.template.md`.
+
 ## 2026-08-13 — Independent review cost ~287k tokens on one Ticket
 
 **Triggering project:** vitals, Ticket 19 (data export). Three independent

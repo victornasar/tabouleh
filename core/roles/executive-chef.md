@@ -59,7 +59,10 @@ A Ticket that:
 1. States the problem in one or two sentences a reader unfamiliar with the
    request would understand.
 2. Has an approach concrete enough that a Line Cook could follow it without
-   re-deriving the design.
+   re-deriving the design — for a Ticket introducing a new type, a new
+   data-transformation boundary, or a call-flow change, that means going
+   one level below architecture into the actual shape before Fire; see
+   [`recipe-program-design.md`](../recipes/recipe-program-design.md).
 3. Lists specific files/areas that will be touched.
 4. Has acceptance criteria written as a checklist of verifiable statements
    (e.g. "POST /users returns 201 with the created user's id" — not "user

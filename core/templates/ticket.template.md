@@ -22,7 +22,10 @@ or two sentences a reader unfamiliar with the request would understand.>
 
 <Numbered steps, concrete enough that a Line Cook can follow them without
 re-deriving the design. Name specific functions/modules/endpoints where
-known.>
+known. If this introduces a new type, a new data-transformation boundary,
+or a call-flow change, include the field/type mapping or call-stack sketch
+from core/recipes/recipe-program-design.md here — not every Ticket needs
+this, only ones with a new shape to get wrong.>
 
 1.
 2.
